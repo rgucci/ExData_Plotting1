@@ -16,17 +16,42 @@ x <- as.POSIXct(strptime(paste(data$Date, data$Time, sep=" "),
                          format=timeFormat))
 
 #create submetered data
-y1 <- as.numeric(as.numeric(data$Sub_metering_1))
-y2 <- as.numeric(as.numeric(data$Sub_metering_2))
-y3 <- as.numeric(as.numeric(data$Sub_metering_3))
+#plot 1
+y <- as.numeric(data$Global_active_power)
+
+#plot 2
+y1 <- as.numeric(data$Sub_metering_1)
+y2 <- as.numeric(data$Sub_metering_2)
+y3 <- as.numeric(data$Sub_metering_3)
+
+#plot 3
+yV <- as.numeric(data$Voltage)
+
+#plot 4
+yR <- as.numeric(data$Global_reactive_power)
 
 #open png device
 png("plot4.png", width=480, height=480)
 
-#create the plot
+#set up the plot parameters
 colors <- c("black", "red", "blue")
 legends <- c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
 
+par(mfrow=c(2,2))
+
+#create plot 1
+plot(x, y,
+     type="l",
+     xlab="",
+     ylab="Global Active Power")
+
+#create plot 2
+plot(x, yV,
+     type="l",
+     xlab="datetime",
+     ylab="Voltage")
+
+#create plot 3
 plot(x, y1, 
      type="l",
      col=colors[[1]],
@@ -40,7 +65,14 @@ lines(x, y3,
 legend("topright", 
        legend=legends, 
        lwd=3, 
-       col=colors)
+       col=colors,
+       bty="n")
+
+#create plot 4
+plot(x, yR,
+     type="l",
+     xlab="datetime",
+     ylab="Global_reactive_power")
 
 #close png device
 dev.off()
