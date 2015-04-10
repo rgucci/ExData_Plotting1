@@ -16,9 +16,9 @@ x <- as.POSIXct(strptime(paste(data$Date, data$Time, sep=" "),
                          format=timeFormat))
 
 #create submetered data
-y1 <- as.numeric(as.numeric(data$Sub_metering_1))
-y2 <- as.numeric(as.numeric(data$Sub_metering_2))
-y3 <- as.numeric(as.numeric(data$Sub_metering_3))
+y1 <- as.numeric(data$Sub_metering_1)
+y2 <- as.numeric(data$Sub_metering_2)
+y3 <- as.numeric(data$Sub_metering_3)
 
 #open png device
 png("plot3.png", width=480, height=480)
